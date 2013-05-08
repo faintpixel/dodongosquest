@@ -3,14 +3,14 @@ MainMenu = function(io){
 	
 	var background1 = new iio.ioRect(800, 300)
 		.enableKinematics()
-		.setVel(0.15,0)
+		.setVel(10,0)
 		.createWithImage('Resources/MainMenu/background.jpg', function(){
 			io.addToGroup('background', background1, -10);
 		});
 	
 	var background2 = new iio.ioRect(-800, 300)
 		.enableKinematics()
-		.setVel(0.15,0)
+		.setVel(10,0)
 		.createWithImage('Resources/MainMenu/background.jpg', function(){
 			io.addToGroup('background', background2, -10);
 		});
@@ -36,10 +36,10 @@ MainMenu = function(io){
 		});
 	
 	io.setFramerate(60, function(){
-		if (background1.pos.x > 1600)
-			background1.setPos(-800, 300);
-		if (background2.pos.x > 1600)
-			background2.setPos(-800, 300);
+		if (background1.pos.x > 2100)
+			background1.pos.x = -800;
+		if (background2.pos.x > 2100)
+			background2.pos.x = -800;
 	});
 	
 	window.addEventListener('keydown', function(event){
