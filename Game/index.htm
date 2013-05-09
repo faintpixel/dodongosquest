@@ -6,7 +6,11 @@
     <script type="text/javascript">
 		var SCREEN_WIDTH = 826;
 		var SCREEN_HEIGHT = 559;
-		iio.start(MainMenu, SCREEN_WIDTH, SCREEN_HEIGHT);
+		var gameManager = iio.start(MainMenu, SCREEN_WIDTH, SCREEN_HEIGHT);
+		
+		function SwitchGame(newGame) {
+			newGame(gameManager);
+		}
     </script>
   </body>
 </html>

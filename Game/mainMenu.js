@@ -49,9 +49,8 @@ MainMenu = function(io){
 			MoveMenuSelection(1);
 		else if (iio.keyCodeIs('enter', event))
 			if(menuIndex == 0) {
-				alert("NO NEW GAME FOR YOU");
-				iio.stop(MainMenu);
-				iio.start(CustomizeYourself);
+				Dispose();
+				SwitchGame(CustomizeYourself);
 			}
 			else
 				alert("NOPE");
@@ -71,6 +70,11 @@ MainMenu = function(io){
 			menuSelector.setPos(340, 544);
 		}
 		
+		io.draw();
+	}
+	
+	function Dispose() {
+		io.rmvAll();
 		io.draw();
 	}
 };
