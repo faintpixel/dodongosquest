@@ -43,7 +43,6 @@ MainMenu = function(io){
 	});
 	
 	var keyboardHandler = function(event){
-		alert("key");
 		if (iio.keyCodeIs('left arrow', event))
 			MoveMenuSelection(-1);
 		else if (iio.keyCodeIs('right arrow', event))

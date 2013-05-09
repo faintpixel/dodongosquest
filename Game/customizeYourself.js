@@ -12,6 +12,16 @@ CustomizeYourself = function(io){
 		.createWithImage('Resources/CustomizeYourself/background.jpg', function(){
 			io.addToGroup('background', background2, -10);
 		});
+	
+	var title = new iio.ioRect(400, 63)
+		.createWithImage('Resources/CustomizeYourself/title.png', function(){
+			io.addToGroup('foreground', title, 1);
+		});
+		
+	var pictureFrame = new iio.ioRect(156, 337)
+		.createWithImage('Resources/CustomizeYourself/pictureFrame.png', function(){
+			io.addToGroup('foreground', pictureFrame, 1);
+		});
 		
 	io.setFramerate(60, function(){
 		if (background1.pos.x > 1275)
