@@ -3,14 +3,14 @@ MainMenu = function(io){
 	
 	var background1 = new iio.ioRect(800, 300)
 		.enableKinematics()
-		.setVel(10,0)
+		.setVel(0.07,0)
 		.createWithImage('Resources/MainMenu/background.jpg', function(){
 			io.addToGroup('background', background1, -10);
 		});
 	
 	var background2 = new iio.ioRect(-800, 300)
 		.enableKinematics()
-		.setVel(10,0)
+		.setVel(0.07,0)
 		.createWithImage('Resources/MainMenu/background.jpg', function(){
 			io.addToGroup('background', background2, -10);
 		});
