@@ -30,4 +30,10 @@ CustomizeYourself = function(io){
 			background2.pos.x = -426;
 	});	
 	
+	currentGameDisposalMethod = function Dispose() {
+		//window.removeEventListener('keydown', keyboardHandler);
+		io.rmvAll();
+		io.draw();
+	};
+	
 };

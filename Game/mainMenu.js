@@ -49,7 +49,6 @@ MainMenu = function(io){
 			MoveMenuSelection(1);
 		else if (iio.keyCodeIs('enter', event))
 			if(menuIndex == 0) {
-				Dispose();
 				SwitchGame(CustomizeYourself);
 			}
 			else
@@ -75,9 +74,9 @@ MainMenu = function(io){
 		io.draw();
 	}
 	
-	function Dispose() {
+	currentGameDisposalMethod = function Dispose() {
 		window.removeEventListener('keydown', keyboardHandler);
 		io.rmvAll();
 		io.draw();
-	}
+	};
 };
