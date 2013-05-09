@@ -20,17 +20,17 @@ MainMenu = function(io){
 			io.addToGroup('foreground', title, 1);
 		});
 
-	var newGame = new iio.ioRect(128, 544)
+	var newGame = new iio.ioRect(128, 574)
 		.createWithImage('Resources/MainMenu/newGame.png', function(){
 			io.addToGroup('foreground', newGame, 1);
 		});
 	
-	var loadGame = new iio.ioRect(590, 544)
+	var loadGame = new iio.ioRect(570, 578)
 		.createWithImage('Resources/MainMenu/loadGame.png', function(){
 			io.addToGroup('foreground', loadGame, 1);
 		});
 	
-	var menuSelector = new iio.ioRect(22, 544)
+	var menuSelector = new iio.ioRect(22, 574)
 		.createWithImage('Resources/MainMenu/menuSelector.png', function(){
 			io.addToGroup('foreground', menuSelector, 1);
 		});
@@ -42,7 +42,8 @@ MainMenu = function(io){
 			background2.pos.x = -800;
 	});
 	
-	window.addEventListener('keydown', function(event){
+	var keyboardHandler = function(event){
+		alert("key");
 		if (iio.keyCodeIs('left arrow', event))
 			MoveMenuSelection(-1);
 		else if (iio.keyCodeIs('right arrow', event))
@@ -54,7 +55,9 @@ MainMenu = function(io){
 			}
 			else
 				alert("NOPE");
-	});
+	};
+	
+	window.addEventListener('keydown', keyboardHandler);
 	
 	function MoveMenuSelection(modifier) {
 		menuIndex += modifier;
@@ -64,16 +67,17 @@ MainMenu = function(io){
 			menuIndex = 1;
 			
 		if(menuIndex == 0) {
-			menuSelector.setPos(22, 544);
+			menuSelector.setPos(22, 574);
 		}
 		else {
-			menuSelector.setPos(340, 544);
+			menuSelector.setPos(320, 574);
 		}
 		
 		io.draw();
 	}
 	
 	function Dispose() {
+		window.removeEventListener('keydown', keyboardHandler);
 		io.rmvAll();
 		io.draw();
 	}
