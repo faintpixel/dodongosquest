@@ -1,82 +1,91 @@
-MainMenu = function(io){
-	var menuIndex = 0;
-	
-	var background1 = new iio.ioRect(800, 300)
+MainMenu = {};
+
+MainMenu.menuIndex = 0;
+
+MainMenu.Initialize = function(io) {
+	MainMenu.background1 = new iio.ioRect(800, 300)
 		.enableKinematics()
 		.setVel(0.07,0)
 		.createWithImage('Resources/MainMenu/background.jpg', function(){
-			io.addToGroup('background', background1, -10);
-		});
-	
-	var background2 = new iio.ioRect(-800, 300)
-		.enableKinematics()
-		.setVel(0.07,0)
-		.createWithImage('Resources/MainMenu/background.jpg', function(){
-			io.addToGroup('background', background2, -10);
+		io.addToGroup('background', MainMenu.background1, -10);
 		});
 		
-	var title = new iio.ioRect(400, 64)
+	MainMenu.background2 = new iio.ioRect(-800, 300)
+		.enableKinematics()
+		.setVel(0.07,0)
+		.createWithImage('Resources/MainMenu/background.jpg', function(){
+			io.addToGroup('background', MainMenu.background2, -10);
+		});
+		
+	MainMenu.title = new iio.ioRect(400, 64)
 		.createWithImage('Resources/MainMenu/title.png', function(){
-			io.addToGroup('foreground', title, 1);
+			io.addToGroup('foreground', MainMenu.title, 1);
 		});
 
-	var newGame = new iio.ioRect(128, 574)
+	MainMenu.newGame = new iio.ioRect(128, 574)
 		.createWithImage('Resources/MainMenu/newGame.png', function(){
-			io.addToGroup('foreground', newGame, 1);
+			io.addToGroup('foreground', MainMenu.newGame, 1);
 		});
 	
-	var loadGame = new iio.ioRect(570, 578)
+	MainMenu.loadGame = new iio.ioRect(570, 578)
 		.createWithImage('Resources/MainMenu/loadGame.png', function(){
-			io.addToGroup('foreground', loadGame, 1);
+			io.addToGroup('foreground', MainMenu.loadGame, 1);
 		});
 	
-	var menuSelector = new iio.ioRect(22, 574)
+	MainMenu.menuSelector = new iio.ioRect(22, 574)
 		.createWithImage('Resources/MainMenu/menuSelector.png', function(){
-			io.addToGroup('foreground', menuSelector, 1);
+			io.addToGroup('foreground', MainMenu.menuSelector, 1);
 		});
-	
-	io.setFramerate(60, function(){
-		if (background1.pos.x > 2100)
-			background1.pos.x = -800;
-		if (background2.pos.x > 2100)
-			background2.pos.x = -800;
-	});
-	
-	var keyboardHandler = function(event){
-		if (iio.keyCodeIs('left arrow', event))
-			MoveMenuSelection(-1);
-		else if (iio.keyCodeIs('right arrow', event))
-			MoveMenuSelection(1);
-		else if (iio.keyCodeIs('enter', event))
-			if(menuIndex == 0) {
-				SwitchGame(CustomizeYourself);
-			}
-			else
-				alert("NOPE");
-	};
-	
-	window.addEventListener('keydown', keyboardHandler);
-	
-	function MoveMenuSelection(modifier) {
-		menuIndex += modifier;
-		if(menuIndex > 1)
-			menuIndex = 0;
-		else if(menuIndex < 0)
-			menuIndex = 1;
-			
-		if(menuIndex == 0) {
-			menuSelector.setPos(22, 574);
-		}
-		else {
-			menuSelector.setPos(320, 574);
-		}
-		
-		io.draw();
-	}
-	
-	currentGameDisposalMethod = function Dispose() {
-		window.removeEventListener('keydown', keyboardHandler);
-		io.rmvAll();
-		io.draw();
-	};
 };
+
+MainMenu.Update = function() {
+	if (MainMenu.background1.pos.x > 2100)
+		MainMenu.background1.pos.x = -800;
+	if (MainMenu.background2.pos.x > 2100)
+		MainMenu.background2.pos.x = -800;
+};
+
+MainMenu.HandleKeyboardInput = function(event) {
+	if (iio.keyCodeIs('left arrow', event))
+		MainMenu.MoveMenuSelection(-1);
+	else if (iio.keyCodeIs('right arrow', event))
+		MainMenu.MoveMenuSelection(1);
+	else if (iio.keyCodeIs('enter', event)) {
+		if(MainMenu.menuIndex == 0) {
+			ChangeGameModule(CustomizeYourself);
+		}
+		else
+			alert("NOPE");
+	}
+};
+
+MainMenu.MoveMenuSelection = function(modifier) {
+	MainMenu.menuIndex += modifier;
+	if(MainMenu.menuIndex > 1)
+		MainMenu.menuIndex = 0;
+	else if(MainMenu.menuIndex < 0)
+		MainMenu.menuIndex = 1;
+		
+	if(MainMenu.menuIndex == 0) {
+		MainMenu.menuSelector.setPos(22, 574);
+	}
+	else {
+		MainMenu.menuSelector.setPos(320, 574);
+	}
+};
+
+MainMenu.Dispose = function(io) {
+	io.rmvAll();
+	io.draw();
+};
+
+
+
+
+
+
+
+
+
+
+

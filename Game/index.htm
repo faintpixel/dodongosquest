@@ -1,9 +1,9 @@
 <!doctype html>
   <body>
 	<div style="position: absolute; left: 900px; top: 10px;" id="gameLinks">
-		<a href = "#" onclick="SwitchGame(MainMenu);">Main Menu</a><br/>
-		<a href = "#" onclick="SwitchGame(CustomizeYourself);">Customize Yourself!!</a><br/>
-		<a href = "#" onclick="SwitchGame(HoboQuiz);">Hobo Quiz</a><br/>
+		<a href = "#" onclick="ChangeGameModule(MainMenu);">Main Menu</a><br/>
+		<a href = "#" onclick="ChangeGameModule(CustomizeYourself);">Customize Yourself!!</a><br/>
+		<a href = "#" onclick="ChangeGameModule(HoboQuiz);">Hobo Quiz</a><br/>
 	</div>
     <script type="text/javascript" src="iioEngine-1.2.1.min.js"></script>
     <script src="http//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -13,13 +13,33 @@
     <script type="text/javascript">
 		var SCREEN_WIDTH = 800;
 		var SCREEN_HEIGHT = 600;
-		var currentGameDisposalMethod;
-		var gameManager = iio.start(MainMenu, SCREEN_WIDTH, SCREEN_HEIGHT);
+		var ChangeGameModule;
 		
-		function SwitchGame(newGame) {
-			currentGameDisposalMethod();
-			newGame(gameManager);
-		}
+		Game = function(io){
+			currentModule = MainMenu;
+			currentModule.Initialize(io);
+			
+			io.setFramerate(60, function(){
+				currentModule.Update();
+			});
+			
+			var KeyboardHandler = function(event){
+				currentModule.HandleKeyboardInput(event);
+			};
+	
+			window.addEventListener('keydown', KeyboardHandler);
+			
+			ChangeGameModule = function(newModule) {
+				currentModule.Dispose(io);
+				newModule.Initialize(io);
+				currentModule = newModule;
+			}
+		
+		};
+		iio.start(Game, SCREEN_WIDTH, SCREEN_HEIGHT);
+		
+		
+		
     </script>
   </body>
 </html>
