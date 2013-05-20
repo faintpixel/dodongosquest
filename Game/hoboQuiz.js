@@ -19,12 +19,14 @@ setup = [
     ];
 
  content = [
-['Which pokemon is yellow and all like "bzzt?"','pikachu'],
 ['What article of clothing was given to Dobby by mistake?','sock'],
-['question3','answer3'],
-['question4','answer4'],
-['question5','answer5']  
-];
+['Chris Buzelli is a professor of illustration at what University?','rhode island institute of design'],
+['A squared plus B squared equals what?','c squared'],
+['Which pokemon is yellow and all like "bzzt?"','pikachu'],
+['2 men enter, how many leave?','one'],
+['August 1st 1981, MTV launched. What was the first song that was played?','video killed the radio star'],
+['You\'re sitting on the subway and a hipster drops his satchel. You root around inside and discover a 1 lbs bag of drugs. Mistaking it for oregano, you sprinkle half of it on a 1 square inch of cheese you find in an old pizza box. You split the cheese in half and share with your dog, Felix. How many ounces of drugs did you accidentally consume? ','4']
+ ];
 
 
 
@@ -77,6 +79,11 @@ $(document).ready(function() {
       $("#answer").show();
     });
 
+	currentGameDisposalMethod = function Dispose() {
+		window.removeEventListener('keydown', keyboardHandler);
+		io.rmvAll();
+		io.draw();
+	};
     
 });
 };
